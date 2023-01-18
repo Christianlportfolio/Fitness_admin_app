@@ -1,0 +1,105 @@
+﻿<Window x:Class="FitnessApp.View.UpdateCustomerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessApp.View"
+        mc:Ignorable="d"
+        Title="UpdateCustomerDialog" Height="850" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Window.Resources>
+        <Style x:Key="standardBtn"  TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="80"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="#6fcd6b" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#FF294B60"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <ListBox x:Name="lbCustomer" DataContext="{Binding cvm}" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCostumer}" HorizontalAlignment="Left" Height="530" Margin="72,161,0,0" VerticalAlignment="Top" Width="258" SelectionChanged="lbCustomer_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"/>
+                        <Label Content=":"/>
+                        <Label Content="{Binding CprNumber}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Label Content="Navn*:" HorizontalAlignment="Left" Margin="408,159,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbName" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.Name, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbName_TextChanged" />
+
+        <Label Content="CPR-nummer*:" HorizontalAlignment="Left" Margin="408,193,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbCprNumber" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.CprNumber, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="519,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbCprNumber_TextChanged" />
+
+        <Label Content="Alder*:" HorizontalAlignment="Left" Margin="408,230,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbAge" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.Age, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,232,0,0" VerticalAlignment="Top" Width="179"  Height="24" ItemsSource="{Binding Age}" IsEditable="True" SelectionChanged="cbAge_SelectionChanged"/>
+
+        <Label Content="Adresse*:" HorizontalAlignment="Left" Margin="408,272,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbAddress" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.Address, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbAddress_TextChanged" />
+
+        <Label Content="Postnummer*:" HorizontalAlignment="Left" Margin="408,311,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbZipCode" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.ZipCode, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbZipCode_TextChanged" />
+
+        <Label Content="By*:" HorizontalAlignment="Left" Margin="408,350,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbCity" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.City, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbCity_TextChanged"  />
+
+        <Label Content="Email*:" HorizontalAlignment="Left" Margin="408,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbEmail" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.Email, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,393,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbEmail_TextChanged" />
+
+        <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="408,428,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbTelephoneNumber" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.PhoneNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,432,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Height="18" TextChanged="tbTelephoneNumber_TextChanged" />
+
+        <Label Content="Nyhedsbrev:" HorizontalAlignment="Left" Margin="408,483,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbTrue" DataContext="{Binding ehm}" IsChecked="{Binding IsCheckedYes}" Content="Ja" HorizontalAlignment="Left" Margin="519,488,0,0" VerticalAlignment="Top" Checked="cbTrue_Checked" />
+        <CheckBox x:Name="cbFalse" DataContext="{Binding ehm}" IsChecked="{Binding IsCheckedNo}"  Content="Nej" HorizontalAlignment="Left" Margin="579,488,0,0" VerticalAlignment="Top" Checked="cbFalse_Checked"/>
+
+
+
+        <Label Content="Reg-nr*:&#xA;" HorizontalAlignment="Left" Margin="406,536,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbRegisterNumber" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.RegisterNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,539,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TextChanged="tbRegisterNumber_TextChanged"/>
+
+        <Label Content="Konto-nr.*:" HorizontalAlignment="Left" Margin="406,576,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbContoNumber" DataContext="{Binding cvm}" Text="{Binding SelectedCostumer.ContoNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="519,580,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" TextChanged="tbContoNumber_TextChanged"/>
+
+        <Label Content="Accept af betalingsbetingelser.*:" HorizontalAlignment="Left" Margin="406,631,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Content="Samtykkeerklæring:" HorizontalAlignment="Left" Margin="406,673,0,0" VerticalAlignment="Top"/>
+
+        <CheckBox x:Name="cbAcceptOfPayment" DataContext="{Binding cvm}" IsChecked="{Binding SelectedCostumer.MembershipCondition, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="608,636,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.111,0.837" Checked="cbAcceptOfPayment_Checked"/>
+        <CheckBox x:Name="cbAcceptOfConsent" DataContext="{Binding cvm}" IsChecked="{Binding SelectedCostumer.Consent, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="608,678,0,0" VerticalAlignment="Top" Checked="cbAcceptOfConsent_Checked"/>
+
+
+        <Button x:Name="btnUpdateCustomer" Content="Opdater" IsEnabled="false" HorizontalAlignment="Left" Margin="618,744,0,0" VerticalAlignment="Top" Height="28" Width="80" Click="btnUpdateCustomer_Click" Background="#6fcd6b" BorderThickness="0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnDeleteCustomer" Style="{StaticResource standardBtn}" Content="Slet" HorizontalAlignment="Left" Margin="526,743,0,0" VerticalAlignment="Top" Click="btnDeleteCustomer_Click"/>
+        <Button Content="Fortryd" Style="{StaticResource standardBtn}" HorizontalAlignment="Left" Margin="431,743,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelUpdateSelectedCustomer" Content="Slet eller opdater kunde" HorizontalAlignment="Center" Margin="0,44,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Kundeliste" HorizontalAlignment="Left" Margin="72,118,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label Content="Kunde" HorizontalAlignment="Left" Margin="405,118,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.547,1.147"/>
+
+
+    </Grid>
+</Window>
